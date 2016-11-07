@@ -3,10 +3,7 @@
     "rules": [
       "AdxVerificationCompositeRule"
     ],
-    "packages": {
-      "Microsoft.AspNetCore.Mvc.Razor.Precompilation.Design": { },
-      "Microsoft.AspNetCore.Mvc.Razor.Precompilation.Tools": { }
-    }
+    "packages": {}
   },
   "Default": { // Rules to run for packages not listed in any other set.
     "rules": [
