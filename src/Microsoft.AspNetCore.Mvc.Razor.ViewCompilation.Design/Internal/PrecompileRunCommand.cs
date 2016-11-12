@@ -135,7 +135,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Design.Internal
                 var fileInfo = results[i].RelativeFileInfo;
 
                 resources[i] = new ResourceDescription(
-                    fileInfo.RelativePath.Replace('\\', '/'),
+                    fileInfo.RelativePath,
                     fileInfo.FileInfo.CreateReadStream,
                     isPublic: true);
             }
@@ -256,7 +256,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Design.Internal
         {
             foreach (var fileInfo in fileProvider.GetDirectoryContents(root))
             {
-                var relativePath = Path.Combine(root, fileInfo.Name);
+                var relativePath = root + "/" + fileInfo.Name;
                 if (fileInfo.IsDirectory)
                 {
                     GetRazorFiles(fileProvider, razorFiles, relativePath);
