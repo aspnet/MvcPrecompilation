@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "dotnet-test-xunit": "2.2.0-*",
-    "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Tools": "1.1.0-*",
+    "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Tools": "1.1.0-preview4-final",
     "xunit": "2.2.0-*"
   },
   "frameworks": {
@@ -9,7 +9,7 @@
       "dependencies": {
         "Microsoft.NETCore.App": {
           "type": "platform",
-          "version": "1.1.0-*"
+          "version": "1.1.0"
         }
       },
       "net451": {}

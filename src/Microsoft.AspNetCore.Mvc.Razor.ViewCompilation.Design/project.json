@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0-*",
+  "version": "1.1.0-preview4-final",
   "description": "Build-time references required to enable Razor view compilation as part of building the application.",
   "packOptions": {
     "repository": {
@@ -24,16 +24,16 @@
     "xmlDoc": true
   },
   "dependencies": {
-    "Microsoft.AspNetCore.Hosting": "1.1.0-*",
-    "Microsoft.AspNetCore.Mvc.Razor": "1.1.0-*",
-    "Microsoft.Extensions.CommandLineUtils": "1.1.0-*"
+    "Microsoft.AspNetCore.Hosting": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.Razor": "1.1.0",
+    "Microsoft.Extensions.CommandLineUtils": "1.1.0"
   },
   "frameworks": {
     "netcoreapp1.0": {
       "dependencies": {
         "Microsoft.NETCore.App": {
           "type": "platform",
-          "version": "1.1.0-*"
+          "version": "1.1.0"
         }
       }
     },
