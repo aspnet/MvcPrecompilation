@@ -9,7 +9,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.AspNetCore.Mvc.Razor.Internal;
 using Microsoft.CodeAnalysis;
@@ -151,15 +150,33 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Design.Internal
             Directory.CreateDirectory(Path.GetDirectoryName(assemblyPath));
 
             EmitResult emitResult;
-            using (var assemblyStream = File.OpenWrite(assemblyPath))
+            using (var assemblyStream = new MemoryStream())
             {
-                using (var pdbStream = File.OpenWrite(Path.ChangeExtension(assemblyPath, ".pdb")))
+                using (var pdbStream = new MemoryStream())
                 {
                     emitResult = compilation.Emit(
                         assemblyStream,
                         pdbStream,
                         manifestResources: resources,
                         options: MvcServiceProvider.Compiler.EmitOptions);
+
+                    if (emitResult.Success)
+                    {
+                        var pdbPath = Path.ChangeExtension(assemblyPath, ".pdb");
+                        assemblyStream.Position = 0;
+                        pdbStream.Position = 0;
+
+                        // Avoid writing to disk unless the compilation is successful.
+                        using (var assemblyFileStream = File.OpenWrite(assemblyPath))
+                        {
+                            assemblyStream.CopyTo(assemblyFileStream);
+                        }
+
+                        using (var pdbFileStream = File.OpenWrite(pdbPath))
+                        {
+                            pdbStream.CopyTo(pdbFileStream);
+                        }
+                    }
                 }
             }
 
