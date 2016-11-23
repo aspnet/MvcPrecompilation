@@ -103,7 +103,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Design.Internal
             var resources = GetResources(results);
 
             var assemblyPath = Path.Combine(OutputPathOption.Value(), precompileAssemblyName + ".dll");
-            var emitResult = EmitAssembly(compilation, assemblyPath, resources);
+            var emitResult = EmitAssembly(
+                compilation,
+                MvcServiceProvider.Compiler.EmitOptions,
+                assemblyPath,
+                resources);
 
             if (!emitResult.Success)
             {
@@ -142,13 +146,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Design.Internal
             return resources;
         }
 
-        private EmitResult EmitAssembly(
+        public EmitResult EmitAssembly(
             CSharpCompilation compilation,
+            EmitOptions emitOptions,
             string assemblyPath,
             ResourceDescription[] resources)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(assemblyPath));
-
             EmitResult emitResult;
             using (var assemblyStream = new MemoryStream())
             {
@@ -158,10 +161,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Design.Internal
                         assemblyStream,
                         pdbStream,
                         manifestResources: resources,
-                        options: MvcServiceProvider.Compiler.EmitOptions);
+                        options: emitOptions);
 
                     if (emitResult.Success)
                     {
+                        Directory.CreateDirectory(Path.GetDirectoryName(assemblyPath));
                         var pdbPath = Path.ChangeExtension(assemblyPath, ".pdb");
                         assemblyStream.Position = 0;
                         pdbStream.Position = 0;
