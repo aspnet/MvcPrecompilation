@@ -1,0 +1,62 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_MvcRazorOutputFullPath></_MvcRazorOutputFullPath>
+    <_MvcRazorResponseFilePath>$(IntermediateOutputPath)/microsoft.aspnetcore.mvc.razor.viewcompilation.rsp</_MvcRazorResponseFilePath>
+  </PropertyGroup>
+
+  <Target Name="_CreateResponseFileForMvcRazorPrecompile">
+    <PropertyGroup>
+      <_MvcRazorOutputPath Condition="'$(MvcRazorOutputPath)'!='' AND !HasTrailingSlash('$(MvcRazorOutputPath)')">$(MvcRazorOutputPath)\</_MvcRazorOutputPath>
+      <_MvcRazorOutputPath Condition="'$(MvcRazorOutputPath)'!=''">$(_MvcRazorOutputPath)$(TargetFramework)</_MvcRazorOutputPath>
+      <_MvcRazorOutputPath Condition="'$(MvcRazorOutputPath)'==''">$(OutputPath)</_MvcRazorOutputPath>
+      <_MvcRazorOutputFullPath>$([System.IO.Path]::Combine($([System.IO.Path]::GetFullPath('$(_MvcRazorOutputPath)')), '$(MSBuildProjectName).PrecompiledViews.dll'))</_MvcRazorOutputFullPath>
+      <MvcRazorContentRoot Condition="'$(MvcRazorContentRoot)'==''">$(MSBuildProjectDirectory)</MvcRazorContentRoot>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ExecArgs Include="
+        $(MSBuildProjectDirectory);
+        --output-path=$(_MvcRazorOutputPath);
+        --application-name=$(MSBuildProjectName);
+        --content-root=$(MvcRazorContentRoot);" />
+
+      <ExecArgs
+        Condition="'$(MvcRazorEmbedViewSources)'=='true'"
+        Include="--embed-view-sources" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(SignAssembly)'=='true'">
+      <ExecArgs 
+        Condition="'$(DelaySign)'=='true'"
+        Include="--delay-sign" />
+      <ExecArgs 
+        Condition="'$(PublicSign)'=='true'"
+        Include="--public-sign" />
+      <ExecArgs Include="--key-file=$(AssemblyOriginatorKeyFile)" />
+    </ItemGroup>
+
+    <WriteLinesToFile
+      File="$(_MvcRazorResponseFilePath)"
+      Lines="@(ExecArgs)" 
+      Overwrite="true"  />
+  </Target>
+
+   <Target 
+      Name="_MvcRazorPrecompileOnPublish"
+      DependsOnTargets="MvcRazorPrecompile"
+      AfterTargets="PrepareForPublish"
+      Condition="'$(MvcRazorCompileOnPublish)'=='true'">
+
+    <PropertyGroup>
+     <PrecompiledViewsGeneratedDll>$([System.IO.Path]::GetFileName('$(_MvcRazorOutputFullPath)'))</PrecompiledViewsGeneratedDll>
+     <PrecompiledViewsGeneratedDllPath>$(_MvcRazorOutputFullPath)</PrecompiledViewsGeneratedDllPath>
+    </PropertyGroup>
+
+     <ItemGroup>  
+      <ResolvedFileToPublish Include="$(PrecompiledViewsGeneratedDllPath)" CopyToPublishDirectory="Always">
+        <RelativePath>$(PrecompiledViewsGeneratedDll)</RelativePath>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+</Project>
+
