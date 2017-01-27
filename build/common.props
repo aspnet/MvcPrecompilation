@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\version.props" />
-  <Import Project="..\.build\common.props" Condition="Exists('..\.build\common.props')" />
 
   <PropertyGroup>
     <Product>Microsoft ASP.NET Core</Product>
@@ -17,9 +16,4 @@
   <ItemGroup Condition="'$(BuildingInsideVisualStudio)'!='true'">
     <Compile Include="**\*.cs" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Internal.AspNetCore.Sdk" Version="1.0.0-alpha-15156" PrivateAssets="All" />
-  </ItemGroup>
-
 </Project>

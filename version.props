@@ -2,6 +2,6 @@
 <Project>
     <PropertyGroup>
         <Version>1.1.0-msbuild3-update1</Version>
-        <PackageVersion>1.1.0-msbuild3-update1</PackageVersion>
+        <PackageVersion>$(Version)</PackageVersion>
     </PropertyGroup>
 </Project>
