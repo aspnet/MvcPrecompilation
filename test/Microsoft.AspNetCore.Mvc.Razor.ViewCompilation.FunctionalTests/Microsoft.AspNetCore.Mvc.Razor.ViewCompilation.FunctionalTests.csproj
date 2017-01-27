@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <DefineConstants>$(DefineConstants);__remove_this_to__GENERATE_BASELINES</DefineConstants>
+    <OutputType>exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>

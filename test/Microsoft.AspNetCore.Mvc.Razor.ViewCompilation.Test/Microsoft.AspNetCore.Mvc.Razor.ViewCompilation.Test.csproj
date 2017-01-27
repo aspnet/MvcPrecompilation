@@ -2,6 +2,7 @@
   <Import Project="..\..\build\common.props" />
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <OutputType>exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
