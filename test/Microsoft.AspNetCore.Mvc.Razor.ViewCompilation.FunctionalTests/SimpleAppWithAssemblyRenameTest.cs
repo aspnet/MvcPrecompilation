@@ -34,9 +34,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
                     deploymentResult.ApplicationBaseUri,
                     Fixture.Logger);
 
-                // Assert
-                TestEmbeddedResource.AssertContent("SimpleAppWithAssemblyRenameTest.Home.Index.txt", response);
-            }
+				// Assert
+				// ASSERT WORKS WITHOUT RENAME
+				//Assert.Equal("AspNetCore._Views_Home_Index_cshtml, SimpleAppWithAssemblyRename.PrecompiledViews, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", response);
+				
+				Assert.Equal("AspNetCore._Views_Home_Index_cshtml, NewAssemblyName.PrecompiledViews, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", response);
+			}
         }
 
         public class SimpleAppWithAssemblyRenameTestFixture : ApplicationTestFixture
@@ -45,6 +48,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
                 : base("SimpleAppWithAssemblyRename")
             {
             }
+			
         }
     }
 }
