@@ -15,12 +15,12 @@
     <None Include="$(X86ProjectDirectory)\bin\$(Configuration)\net451\$(MSBuildThisFileName)-x86.exe" Pack="true" PackagePath="lib\net451\$(MSBuildThisFileName)-x86.exe" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.0" />
     <ProjectReference Include="$(X86ProjectDirectory)$(MSBuildThisFileName)-x86.csproj" PrivateAssets="true" ReferenceOutputAssembly="false" Condition="'$(TargetFramework)'=='net451'" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
-    <PackageReference Include="Microsoft.NETCore.App" Version="1.1.0" />
+    <PackageReference Include="Microsoft.NETCore.App" Version="1.1.1" />
   </ItemGroup>
 </Project>

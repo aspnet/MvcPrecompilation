@@ -64,7 +64,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
             protected override void Restore()
             {
                 CreateClassLibraryPackage();
-                RestoreProject(ApplicationPath, new[] { _packOutputDirectory, "https://api.nuget.org/v3/index.json" });
+                RestoreProject(ApplicationPath, new[] { _packOutputDirectory, "https://dotnet.myget.org/F/aspnet-1-1-1-patch/api/v3/index.json", "https://api.nuget.org/v3/index.json" });
             }
 
             private void CreateClassLibraryPackage()
