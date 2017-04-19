@@ -44,13 +44,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
             deploymentParameters.PublishEnvironmentVariables.Add(
                 new KeyValuePair<string, string>("MvcRazorExcludeRefAssembliesFromPublish", "false"));
 
-            using (var deployer = ApplicationDeployerFactory.Create(deploymentParameters, Fixture.Logger))
+            using (var deployer = new ApplicationDeployer(deploymentParameters, Fixture.Logger, Fixture.ApplicationPath, Fixture.ApplicationName))
             {
                 // Act
                 var deploymentResult = deployer.Deploy();
 
                 // Assert
-                Assert.True(Directory.Exists(Path.Combine(deploymentResult.ContentRoot, "refs")));
+                var refsDirectory = Path.Combine(deploymentResult.ContentRoot, "refs");
+                Assert.True(Directory.Exists(refsDirectory), $"{refsDirectory} does not exist. {deploymentParameters.PublishedApplicationRootPath}");
             }
         }
 

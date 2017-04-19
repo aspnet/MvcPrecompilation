@@ -13,8 +13,8 @@
     <Compile Include="$(ViewCompilationProjectPath)\Properties\*.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="$(HostingVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="$(MvcVersion)" />
+    <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="$(AspNetCoreCommonVersion)" />
   </ItemGroup>
 </Project>

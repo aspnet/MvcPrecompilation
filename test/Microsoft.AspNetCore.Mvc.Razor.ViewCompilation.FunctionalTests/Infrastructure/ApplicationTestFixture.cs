@@ -21,27 +21,30 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
         private readonly string _oldRestoreDirectory;
         private bool _isRestored;
 
+        private string _workingDirectory = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+
         protected ApplicationTestFixture(string applicationName)
         {
             ApplicationName = applicationName;
             _oldRestoreDirectory = Environment.GetEnvironmentVariable(NuGetPackagesEnvironmentKey);
+            TempRestoreDirectory = CreateTempRestoreDirectory();
         }
 
         public string ApplicationName { get; }
 
         public string ApplicationPath => ApplicationPaths.GetTestAppDirectory(ApplicationName);
 
-        public string TempRestoreDirectory { get; } = CreateTempRestoreDirectory();
+        public string TempRestoreDirectory { get; }
 
         public HttpClient HttpClient { get; } = new HttpClient();
 
         public ILogger Logger { get; private set; }
 
-        public IApplicationDeployer CreateDeployment(RuntimeFlavor flavor)
+        public ApplicationDeployer CreateDeployment(RuntimeFlavor flavor)
         {
             PrepareForDeployment(flavor);
             var deploymentParameters = GetDeploymentParameters(flavor);
-            return ApplicationDeployerFactory.Create(deploymentParameters, Logger);
+            return new ApplicationDeployer(deploymentParameters, Logger, ApplicationPath, ApplicationName);
         }
 
         public virtual void PrepareForDeployment(RuntimeFlavor flavor)
@@ -69,13 +72,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
                 DotnetCLITelemetryOptOut,
                 "1");
 
+            var publishPath = Path.Combine(_workingDirectory, Path.GetRandomFileName());
             var deploymentParameters = new DeploymentParameters(
                 ApplicationPath,
                 ServerType.Kestrel,
                 flavor,
                 RuntimeArchitecture.x64)
             {
-                PublishApplicationBeforeDeployment = true,
+                PublishedApplicationRootPath = Path.Combine(_workingDirectory, Path.GetRandomFileName()),
+                PublishApplicationBeforeDeployment = false,
                 TargetFramework = flavor == RuntimeFlavor.Clr ? "net451" : "netcoreapp1.1",
                 Configuration = "Release",
                 EnvironmentVariables =
@@ -109,7 +114,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
 
         public virtual void Dispose()
         {
-            TryDeleteDirectory(TempRestoreDirectory);
+            TryDeleteDirectory(_workingDirectory);
             HttpClient.Dispose();
         }
 
@@ -119,7 +124,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
             {
                 Directory.Delete(directory, recursive: true);
             }
-            catch (IOException)
+            catch
             {
                 // Ignore delete failures.
             }
@@ -152,9 +157,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
                 .EnsureSuccessful();
         }
 
-        private static string CreateTempRestoreDirectory()
+        private string CreateTempRestoreDirectory()
         {
-            var path = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+            var path = Path.Combine(_workingDirectory, Path.GetRandomFileName());
             return Directory.CreateDirectory(path).FullName;
         }
 

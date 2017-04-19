@@ -9,14 +9,17 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0-preview-20161123-03" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0-beta4-build1194" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.IntegrationTesting" Version="0.3.0-preview1-23538" />
-    <PackageReference Include="Microsoft.AspNetCore.Testing" Version="1.2.0-preview1-23538" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.IntegrationTesting" Version="$(IntegrationTestingVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Testing" Version="$(TestingVersion)" />
     <PackageReference Include="Microsoft.DotNet.Cli.Utils" Version="1.0.0-preview2-003121" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Testing" Version="1.2.0-preview1-23538" />
-    <PackageReference Include="xunit" Version="2.2.0-rc4-build3536" />
-    <PackageReference Include="Microsoft.NETCore.App" Version="1.2.0-beta-001304-00" />
+    <PackageReference Include="Microsoft.DotNet.InternalAbstractions" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="$(LoggingVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Testing" Version="$(TestingVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(LoggingVersion)" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 </Project>

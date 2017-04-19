@@ -1,5 +1,6 @@
 <Project>
   <Import Project="..\version.props" />
+  <Import Project="dependencies.props" />
 
   <PropertyGroup>
     <Product>Microsoft ASP.NET Core</Product>
@@ -11,11 +12,6 @@
     <Copyright Condition="'$(Copyright)'==''">© Microsoft Corporation. All rights reserved.</Copyright>
     <NeutralLanguage Condition="'$(NeutralLanguage)'==''">en-US</NeutralLanguage>
   </PropertyGroup>
-
-   <!-- Workaround for RC3 VS -->
-  <ItemGroup Condition="'$(BuildingInsideVisualStudio)'!='true'">
-    <Compile Include="**\*.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Internal.AspNetCore.Sdk" Version="1.0.0-alpha-15156" PrivateAssets="All" />

@@ -22,7 +22,7 @@ k-standard-goals
         
         using (var zipArchive = ZipFile.Open(projectNupkg, ZipArchiveMode.Update))
         {
-            MoveEntry(zipArchive, "lib/net451/" + projectName + ".exe", "runtimes/win7-x64/lib/net451/" + projectName + ".exe");
+            MoveEntry(zipArchive, "lib/" + projectName + ".exe", "runtimes/win7-x64/lib/net451/" + projectName + ".exe");
             MoveEntry(zipArchive, "lib/net451/" + projectName + "-x86.exe", "runtimes/win7-x86/lib/net451/" + projectName + "-x86.exe");
             zipArchive.CreateEntry("lib/net451/_._");
         }
