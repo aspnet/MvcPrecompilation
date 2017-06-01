@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework Condition=" '$(OS)' != 'Windows_NT' ">net461</TargetFramework>
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
     <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
   </PropertyGroup>
