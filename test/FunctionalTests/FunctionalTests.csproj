@@ -7,6 +7,7 @@
     <DefineConstants>$(DefineConstants);__remove_this_to__GENERATE_BASELINES</DefineConstants>
     <DefineConstants Condition="'$(GenerateBaseLines)'=='true'">$(DefineConstants);GENERATE_BASELINES</DefineConstants>
     <SignAssembly>false</SignAssembly>
+    <PublicSign>false</PublicSign>
   </PropertyGroup>
 
   <ItemGroup>
