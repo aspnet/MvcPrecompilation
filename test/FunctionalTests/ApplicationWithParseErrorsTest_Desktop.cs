@@ -5,11 +5,14 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Testing.xunit;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 
 namespace FunctionalTests
 {
+    [OSSkipCondition(OperatingSystems.Linux)]
+    [OSSkipCondition(OperatingSystems.MacOSX)]
     public class ApplicationWithParseErrorsTest_Desktop
         : IClassFixture<DesktopApplicationTestFixture<ApplicationWithParseErrors.Startup>>
     {
@@ -20,7 +23,7 @@ namespace FunctionalTests
 
         public ApplicationTestFixture Fixture { get; }
 
-        [Fact]
+        [ConditionalFact]
         public async Task PublishingPrintsParseErrors()
         {
             // Arrange

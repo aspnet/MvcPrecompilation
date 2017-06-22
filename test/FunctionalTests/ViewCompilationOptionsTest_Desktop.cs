@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
+using Microsoft.AspNetCore.Testing.xunit;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace FunctionalTests
 {
+    [OSSkipCondition(OperatingSystems.Linux)]
+    [OSSkipCondition(OperatingSystems.MacOSX)]
     public class ViewCompilationOptions_Desktop :
         LoggedTest, IClassFixture<DesktopApplicationTestFixture<SimpleApp.Startup>>
     {
@@ -24,7 +27,7 @@ namespace FunctionalTests
 
         public ApplicationTestFixture Fixture { get; }
 
-        [Fact]
+        [ConditionalFact]
         public async Task Precompilation_PreventsRefAssembliesFromBeingPublished()
         {
             using (StartLog(out var loggerFactory))
@@ -37,7 +40,7 @@ namespace FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
         public async Task Precompilation_PublishesPdbsToOutputDirectory()
         {
             using (StartLog(out var loggerFactory))
@@ -52,6 +55,8 @@ namespace FunctionalTests
         }
     }
 
+    [OSSkipCondition(OperatingSystems.Linux)]
+    [OSSkipCondition(OperatingSystems.MacOSX)]
     public class ViewCompilationOptions_Desktop_ScenarioRefAssembliesDoNotGetPublished :
         LoggedTest, IClassFixture<ViewCompilationOptions_Desktop_ScenarioRefAssembliesDoNotGetPublished.TestFixture>
     {
@@ -65,7 +70,7 @@ namespace FunctionalTests
 
         public ApplicationTestFixture Fixture { get; }
 
-        [Fact]
+        [ConditionalFact]
         public async Task PublishingWithOption_AllowsPublishingRefAssemblies()
         {
             using (StartLog(out var loggerFactory))

@@ -5,12 +5,15 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Testing.xunit;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace FunctionalTests
 {
+    [OSSkipCondition(OperatingSystems.Linux)]
+    [OSSkipCondition(OperatingSystems.MacOSX)]
     public class ApplicationWithCustomInputFilesTest_Desktop
         : LoggedTest, IClassFixture<DesktopApplicationTestFixture<ApplicationWithCustomInputFiles.Startup>>
     {
@@ -24,7 +27,7 @@ namespace FunctionalTests
 
         public ApplicationTestFixture Fixture { get; }
 
-        [Fact]
+        [ConditionalFact]
         public async Task ApplicationWithCustomInputFiles_Works()
         {
             using (StartLog(out var loggerFactory))
@@ -43,7 +46,7 @@ namespace FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
         public async Task MvcRazorFilesToCompile_OverridesTheFilesToBeCompiled()
         {
             using (StartLog(out var loggerFactory))
@@ -68,7 +71,7 @@ namespace FunctionalTests
             }
         }
 
-        [Fact]
+        [ConditionalFact]
         public async Task MvcRazorFilesToCompile_SpecificallyDoesNotPublishFilesToBeCompiled()
         {
             using (StartLog(out var loggerFactory))
