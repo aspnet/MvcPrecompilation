@@ -9,17 +9,17 @@ The Razor syntax provides a fast, terse, clean, and lightweight way to combine s
 ## Installation and usage
 
 ### Referencing the `Microsoft.AspNetCore.Mvc.Razor.ViewCompilation` package
-* If you're targeting ASP.NET Core 2.0 or higher on CoreCLR, a reference to the `Microsoft.AspNetCore.Mvc.Razor.ViewCompilation` package is added by `Microsoft.AspNetCore.All` and you do not need to explicitly reference it.
+* If you're targeting ASP.NET Core 2.0 or higher on netcoreapp2.0, a reference to the `Microsoft.AspNetCore.Mvc.Razor.ViewCompilation` package is added by `Microsoft.AspNetCore.All` and you do not need to explicitly reference it.
 * For desktop targeting projects or projects targeting ASP.NET Core 1.x, add a package reference to the appropriate version of `Microsoft.AspNetCore.Mvc.Razor.ViewCompilation` in your project:
 
 ```xml
 <ItemGroup>
-  <Microsoft.AspNetCore.Mvc.Razor.ViewCompilation Version="1.1.1" />
+  <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.ViewCompilation" Version="1.1.1" />
 </ItemGroup>
 ```
 
 ### Enabling view compilation
-To enable compilation as part of publishing, add the `MvcRazorCompileOnPublish` property:
+View compilation as part of publishing is enabled by default if you're referencing the Web SDK (`Microsoft.NET.Sdk.Web) that ships with .NET Core 2.0 or later versions. For older versions, add the `MvcRazorCompileOnPublish` property to your project:
 ```xml
 <PropertyGroup>
   <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
@@ -37,6 +37,8 @@ Alternatively, you may wire up the `MvcRazorPrecompile` target to a build event:
 ## Options
 
 Some aspects of view compilation can be configured by editing the project:
+
+* `MvcRazorCompileOnPublish`: Setting this to false turns off all functions of view compilation as part of publish.
 
 * `MvcRazorExcludeViewFilesFromPublish`: Enabling `MvcRazorCompileOnPublish` prevents .cshtml files from being published. This option disables this behavior. 
 Note: ASP.NET Core Mvc does not support updateable precompiled views. Any modifications to published cshtml files will be ignored if a precompiled view is discovered for that path.
