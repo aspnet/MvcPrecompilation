@@ -38,7 +38,7 @@ Alternatively, you may wire up the `MvcRazorPrecompile` target to a build event:
 
 Some aspects of view compilation can be configured by editing the project:
 
-* `MvcRazorCompileOnPublish`: Setting this to false turns off all functions of view compilation as part of publish.
+* `MvcRazorCompileOnPublish`: Setting this to `false` turns off all functions of view compilation that are enabled as part of publishing.
 
 * `MvcRazorExcludeViewFilesFromPublish`: Enabling `MvcRazorCompileOnPublish` prevents .cshtml files from being published. This option disables this behavior. 
 Note: ASP.NET Core Mvc does not support updateable precompiled views. Any modifications to published cshtml files will be ignored if a precompiled view is discovered for that path.
