@@ -38,11 +38,12 @@
     DependsOnTargets="_CreateResponseFileForMvcRazorPrecompile"
     Condition="'$(TargetFrameworkIdentifier)'=='.NETCoreApp'">
 
-    <GetDotNetHost Condition="'$(MvcRazorRunCommand)'==''">
+    <GetDotNetHost Condition="'$(MSBuildRuntimeType)'=='Core' AND '$(MvcRazorRunCommand)'==''">
       <Output TaskParameter="MuxerPath" PropertyName="MvcRazorRunCommand" />
     </GetDotNetHost>
 
     <PropertyGroup>
+      <MvcRazorRunCommand Condition="'$(MvcRazorRunCommand)'==''">dotnet</MvcRazorRunCommand>
       <_MvcViewCompilationBinaryPath Condition="'$(_MvcViewCompilationBinaryPath)'==''">$(MSBuildThisFileDirectory)$(MSBuildThisFileName).dll</_MvcViewCompilationBinaryPath>
 
       <ExecArgs>&quot;$(MvcRazorRunCommand)&quot; exec</ExecArgs>
