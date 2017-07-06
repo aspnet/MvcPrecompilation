@@ -150,11 +150,11 @@
           Remove="%(MvcRazorFilesToCompile.FullPath)"
           Condition="'$(MvcRazorExcludeViewFilesFromPublish)'=='true'" />
 
-      <ResolvedFileToPublish Include="$(_MvcRazorOutputFullPath)" CopyToPublishDirectory="Always">
+      <ResolvedFileToPublish Include="$(_MvcRazorOutputFullPath)" CopyToPublishDirectory="Always" Condition="Exists('$(_MvcRazorOutputFullPath)')">
         <RelativePath>$([System.IO.Path]::GetFileName('$(_MvcRazorOutputFullPath)'))</RelativePath>
       </ResolvedFileToPublish>
 
-      <ResolvedFileToPublish Include="$(_MvcRazorOutputPdbFullPath)" CopyToPublishDirectory="Always">
+      <ResolvedFileToPublish Include="$(_MvcRazorOutputPdbFullPath)" CopyToPublishDirectory="Always" Condition="Exists('$(_MvcRazorOutputPdbFullPath)')">
         <RelativePath>$([System.IO.Path]::GetFileName('$(_MvcRazorOutputPdbFullPath)'))</RelativePath>
       </ResolvedFileToPublish>
     </ItemGroup>
@@ -166,4 +166,3 @@
     </ItemGroup>
   </Target>
 </Project>
-

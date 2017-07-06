@@ -46,13 +46,19 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Internal
                 return 1;
             }
 
+            var files = GetRazorFiles();
+            if (files.Count == 0)
+            {
+                return 0;
+            }
+
             MvcServiceProvider = new MvcServiceProvider(
                 ProjectPath,
                 Options.ApplicationNameOption.Value(),
                 Options.ContentRootOption.Value(),
                 Options.ConfigureCompilationType.Value());
 
-            var results = GenerateCode();
+            var results = GenerateCode(files);
             var success = true;
 
             foreach (var result in results)
@@ -218,9 +224,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Internal
             return true;
         }
 
-        private ViewCompilationInfo[] GenerateCode()
+        private ViewCompilationInfo[] GenerateCode(List<ViewFileInfo> files)
         {
-            var files = GetRazorFiles();
             var results = new ViewCompilationInfo[files.Count];
             Parallel.For(0, results.Length, ParalellOptions, i =>
             {
