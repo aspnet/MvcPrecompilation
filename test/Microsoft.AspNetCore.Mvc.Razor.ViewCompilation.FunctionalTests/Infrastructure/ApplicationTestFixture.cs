@@ -28,11 +28,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
             ApplicationName = applicationName;
             _oldRestoreDirectory = Environment.GetEnvironmentVariable(NuGetPackagesEnvironmentKey);
             TempRestoreDirectory = CreateTempRestoreDirectory();
+            ExecutableName = applicationName;
         }
 
         public string ApplicationName { get; }
 
         public string ApplicationPath => ApplicationPaths.GetTestAppDirectory(ApplicationName);
+
+        public string ExecutableName { get; set; }
 
         public string TempRestoreDirectory { get; }
 
@@ -44,7 +47,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
         {
             PrepareForDeployment(flavor);
             var deploymentParameters = GetDeploymentParameters(flavor);
-            return new ApplicationDeployer(deploymentParameters, Logger, ApplicationPath, ApplicationName);
+            return new ApplicationDeployer(deploymentParameters, Logger, ApplicationPath, ApplicationName)
+            {
+                ExecutableName = ExecutableName,
+            };
         }
 
         public virtual void PrepareForDeployment(RuntimeFlavor flavor)
