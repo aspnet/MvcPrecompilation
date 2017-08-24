@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web" ToolsVersion="15.0">
   <Import Project="..\..\build\dependencies.props" />
   <PropertyGroup>
+    <AssemblyName Condition="'$(RenameAssemblyName)'=='true'">DifferentAssembly</AssemblyName>
     <TargetFrameworks>netcoreapp1.1;net451</TargetFrameworks>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <OutputType>Exe</OutputType>

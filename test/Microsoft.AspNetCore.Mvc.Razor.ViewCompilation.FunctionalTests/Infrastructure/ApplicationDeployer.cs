@@ -25,6 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
 
         public string ApplicationPath { get; }
 
+        public string ExecutableName { get; set; }
+
         public ILogger Logger { get; }
 
         public ApplicationDeployer(DeploymentParameters deploymentParameters, ILogger logger, string applicationPath, string applicationName)
@@ -61,7 +63,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
             var executableExtension =
                 DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr ? ".exe" :
                 DeploymentParameters.ApplicationType == ApplicationType.Portable ? ".dll" : "";
-            var executable = Path.Combine(DeploymentParameters.PublishedApplicationRootPath, new DirectoryInfo(DeploymentParameters.ApplicationPath).Name + executableExtension);
+            var executable = Path.Combine(DeploymentParameters.PublishedApplicationRootPath, ExecutableName + executableExtension);
             
             if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr && DeploymentParameters.ApplicationType == ApplicationType.Portable)
             {
