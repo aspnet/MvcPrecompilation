@@ -9,6 +9,6 @@
     <MvcVersion>1.1.3</MvcVersion>
     <RuntimeFrameworkVersion>1.1.2</RuntimeFrameworkVersion>
     <TestingVersion>1.1.1</TestingVersion>
-    <ViewCompilationVersion>1.1.1-*</ViewCompilationVersion>
+    <ViewCompilationVersion>1.1.2-*</ViewCompilationVersion>
   </PropertyGroup>
 </Project>
