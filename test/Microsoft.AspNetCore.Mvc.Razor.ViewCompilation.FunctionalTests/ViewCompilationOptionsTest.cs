@@ -34,7 +34,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.ViewCompilation
             }
         }
 
-        [Theory]
+        [Theory(Skip = "https://github.com/aspnet/MvcPrecompilation/issues/195")]
         [MemberData(nameof(SupportedFlavorsTheoryData))]
         public void PublishingWithOption_AllowsPublishingRefAssemblies(RuntimeFlavor flavor)
         {
