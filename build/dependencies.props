@@ -2,11 +2,11 @@
   <PropertyGroup>
     <AspNetCoreCommonVersion>1.1.1</AspNetCoreCommonVersion>
     <ConfigurationVersion>1.1.2</ConfigurationVersion>
-    <HostingVersion>1.1.2</HostingVersion>
+    <HostingVersion>1.1.3</HostingVersion>
     <IntegrationTestingVersion>0.2.2</IntegrationTestingVersion>
     <KestrelVersion>1.1.2</KestrelVersion>
     <LoggingVersion>1.1.2</LoggingVersion>
-    <MvcVersion>1.1.3</MvcVersion>
+    <MvcVersion>1.1.4</MvcVersion>
     <RuntimeFrameworkVersion>1.1.2</RuntimeFrameworkVersion>
     <TestingVersion>1.1.1</TestingVersion>
     <ViewCompilationVersion>1.1.2-*</ViewCompilationVersion>
