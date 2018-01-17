@@ -6,7 +6,7 @@
     <IntegrationTestingVersion>0.2.3</IntegrationTestingVersion>
     <KestrelVersion>1.1.3</KestrelVersion>
     <LoggingVersion>1.1.2</LoggingVersion>
-    <MvcVersion>1.1.6</MvcVersion>
+    <MvcVersion>1.1.7</MvcVersion>
     <RuntimeFrameworkVersion>1.1.6</RuntimeFrameworkVersion>
     <TestingVersion>1.1.1</TestingVersion>
     <ViewCompilationVersion>1.1.4-*</ViewCompilationVersion>
