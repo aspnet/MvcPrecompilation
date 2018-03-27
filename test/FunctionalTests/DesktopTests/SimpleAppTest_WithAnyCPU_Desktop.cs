@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Testing.xunit;
@@ -15,7 +16,7 @@ namespace FunctionalTests
     public class SimpleAppTest_WithAnyCPU_Desktop :
         LoggedTest, IClassFixture<SimpleAppTest_WithAnyCPU_Desktop.TestFixture>
     {
-        public SimpleAppTest_Desktop(
+        public SimpleAppTest_WithAnyCPU_Desktop(
             TestFixture fixture,
             ITestOutputHelper output)
             : base(output)
@@ -33,10 +34,9 @@ namespace FunctionalTests
                 // Arrange
                 var deployment = await Fixture.CreateDeploymentAsync(loggerFactory);
 
-                // Act
-                var response = await deployment.HttpClient.GetStringWithRetryAsync(
-                    deployment.ApplicationBaseUri,
-                    loggerFactory.CreateLogger(Fixture.ApplicationName));
+                // Act & Assert
+                var dllFile = Path.Combine(deployment.ContentRoot, "SimpleApp.PrecompiledViews.dll");
+                Assert.True(File.Exists(dllFile), $"{dllFile} exists at deployment.");
             }
         }
 

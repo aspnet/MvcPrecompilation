@@ -27,7 +27,6 @@ namespace FunctionalTests
         public ApplicationTestFixture Fixture { get; }
 
         [ConditionalFact]
-        [Fact]
         public async Task PublishingInDebugWorks()
         {
             using (StartLog(out var loggerFactory))
@@ -41,7 +40,7 @@ namespace FunctionalTests
             }
         }
 
-        public class TestFixture : CoreCLRApplicationTestFixture<SimpleApp.Startup>
+        public class TestFixture : DesktopApplicationTestFixture<SimpleApp.Startup>
         {
             public TestFixture()
             {
