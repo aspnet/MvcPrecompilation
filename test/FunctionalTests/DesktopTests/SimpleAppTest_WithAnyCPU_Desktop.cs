@@ -11,8 +11,7 @@ using Xunit.Abstractions;
 
 namespace FunctionalTests
 {
-    [OSSkipCondition(OperatingSystems.Linux)]
-    [OSSkipCondition(OperatingSystems.MacOSX)]
+    [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
     public class SimpleAppTest_WithAnyCPU_Desktop :
         LoggedTest, IClassFixture<SimpleAppTest_WithAnyCPU_Desktop.TestFixture>
     {

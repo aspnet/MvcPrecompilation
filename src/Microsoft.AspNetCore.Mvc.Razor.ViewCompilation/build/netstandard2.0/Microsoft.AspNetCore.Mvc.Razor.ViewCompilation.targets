@@ -86,6 +86,8 @@
 
     <PropertyGroup Condition="'$(_MvcViewCompilationBinaryPath)'==''">
       <_MvcViewCompilationBinaryPath Condition="'$(PlatformTarget)'=='x86'">$(MSBuildThisFileDirectory)$(MSBuildThisFileName)-x86.exe</_MvcViewCompilationBinaryPath>
+
+      <!-- For PlatformTarget = AnyCPU or x64, we will use the x64 binary -->
       <_MvcViewCompilationBinaryPath Condition="'$(_MvcViewCompilationBinaryPath)'==''">$(MSBuildThisFileDirectory)$(MSBuildThisFileName)-x64.exe</_MvcViewCompilationBinaryPath>
     </PropertyGroup>
 
