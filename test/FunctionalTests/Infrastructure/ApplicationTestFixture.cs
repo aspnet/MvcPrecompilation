@@ -53,6 +53,7 @@ namespace FunctionalTests
                 RuntimeArchitecture.x64)
             {
                 ApplicationName = applicationName,
+                ApplicationType = flavor == RuntimeFlavor.Clr ? ApplicationType.Standalone : ApplicationType.Portable,
                 PublishApplicationBeforeDeployment = true,
                 Configuration = "Release",
                 EnvironmentVariables =

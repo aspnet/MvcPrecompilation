@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>$(StandardTestAppTfms)</TargetFrameworks>
-    <RuntimeIdentifiers>win7-x86;debian-x64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win7-x64;win7-x86;debian-x64</RuntimeIdentifiers>
 
     <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
   </PropertyGroup>
