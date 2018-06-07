@@ -6,9 +6,9 @@
     <IntegrationTestingVersion>0.2.3</IntegrationTestingVersion>
     <KestrelVersion>1.1.3</KestrelVersion>
     <LoggingVersion>1.1.2</LoggingVersion>
-    <MvcVersion>1.1.7</MvcVersion>
-    <RuntimeFrameworkVersion>1.1.8</RuntimeFrameworkVersion>
+    <MvcVersion>1.1.8</MvcVersion>
+    <RuntimeFrameworkVersion>1.1.9-servicing-001741-00</RuntimeFrameworkVersion>
     <TestingVersion>1.1.1</TestingVersion>
-    <ViewCompilationVersion>1.1.5-*</ViewCompilationVersion>
+    <ViewCompilationVersion>1.1.6-*</ViewCompilationVersion>
   </PropertyGroup>
 </Project>
